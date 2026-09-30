@@ -1,109 +1,50 @@
 'use client';
 
 import { useState } from 'react';
-import { Baby, Brain, CalendarDays, Clock3, HeartPulse, MapPin, Menu, Phone, ShieldCheck, Stethoscope, X, ArrowRight, Mail } from 'lucide-react';
+import { Baby, Brain, CalendarDays, Clock3, HeartPulse, MapPin, Menu, Phone, ShieldCheck, Stethoscope, X, ArrowRight, Mail, MessageCircle, Users, CheckCircle2, ChevronDown } from 'lucide-react';
 
-const services = [
-  { icon: Baby, title: 'General Paediatrics', text: 'Child-focused consultations, routine health reviews and ongoing care for infants, children and adolescents.' },
-  { icon: Brain, title: 'Paediatric Neurology', text: 'Specialist-focused support for neurological and developmental concerns in children.' },
-  { icon: HeartPulse, title: 'Child Health & Development', text: 'Support for healthy growth, development and age-appropriate wellbeing.' },
-  { icon: Stethoscope, title: 'Specialist Consultation', text: 'Structured consultation requests that help families reach the appropriate clinical team.' },
+const services=[
+{icon:Baby,title:'General Paediatrics',text:'Routine consultations and ongoing child health care from infancy through adolescence.'},
+{icon:Brain,title:'Paediatric Neurology',text:'Specialist-focused support for neurological and developmental concerns in children.'},
+{icon:HeartPulse,title:'Child Health & Development',text:'Support for healthy growth, development and age-appropriate wellbeing.'},
+{icon:Stethoscope,title:'Specialist Consultation',text:'A clear route for families seeking specialist paediatric support.'}
 ];
+const faqs=[['How do I request an appointment?','Choose a service and preferred date using the appointment form. The clinic team can then contact you to confirm availability.'],['Can I use the website for an emergency?','The online form is designed for appointment requests, not emergency care. Emergency contact guidance can be configured with the clinic before launch.'],['What information should I include?','Only basic contact details and a brief reason for consultation are needed. Detailed medical records should not be submitted through a general enquiry form.']];
 
-export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+export default function Home(){
+ const[menuOpen,setMenuOpen]=useState(false);const[submitted,setSubmitted]=useState(false);const[faq,setFaq]=useState(0);
+ const close=()=>setMenuOpen(false);
+ return <main>
+  <div className="concept-bar"><strong>Concept website</strong><span>Independent demonstration prepared for Cedar Paediatric Clinic</span></div>
+  <header className="nav-wrap"><nav className="nav container">
+   <a href="#home" className="brand" onClick={close}><span className="brand-mark"><Baby size={24}/></span><span><strong>Cedar</strong><small>Paediatric Clinic</small></span></a>
+   <div className={`nav-links ${menuOpen?'open':''}`}><a href="#about" onClick={close}>About</a><a href="#services" onClick={close}>Services</a><a href="#why" onClick={close}>Why Cedar</a><a href="#contact" onClick={close}>Contact</a><a className="nav-cta" href="#appointment" onClick={close}>Request appointment</a></div>
+   <button className="menu-btn" onClick={()=>setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen?<X/>:<Menu/>}</button>
+  </nav></header>
 
-  const submitAppointment = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+  <section className="hero" id="home"><div className="container hero-grid">
+   <div className="hero-copy"><span className="eyebrow"><span className="pulse-dot"/>Child-focused specialist care in Kaduna</span><h1>Specialist care for <em>every stage</em> of childhood.</h1><p>Compassionate, professional paediatric care designed around children and the families who care for them.</p><div className="hero-actions"><a href="#appointment" className="btn primary"><CalendarDays size={19}/>Request an appointment</a><a href="#contact" className="btn secondary"><Phone size={19}/>Contact the clinic</a></div><div className="trust-row"><span><Clock3 size={18}/>24-hour care</span><span><ShieldCheck size={18}/>Child-focused</span><span><MapPin size={18}/>Kaduna</span></div></div>
+   <div className="hero-photo"><img src="https://images.pexels.com/photos/8460030/pexels-photo-8460030.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Paediatric consultation with a parent and child"/><div className="photo-overlay"><span><HeartPulse/></span><div><strong>Care that puts children first</strong><small>Warm · Professional · Family-centred</small></div></div></div>
+  </div></section>
 
-  return (
-    <main>
-      <div className="concept-bar">Website concept prepared for Cedar Paediatric Clinic</div>
-      <header className="nav-wrap">
-        <nav className="nav container">
-          <a href="#home" className="brand" aria-label="Cedar Paediatric Clinic home">
-            <span className="brand-mark"><Baby size={24} /></span>
-            <span><strong>Cedar</strong><small>Paediatric Clinic</small></span>
-          </a>
-          <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-            <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
-            <a href="#why" onClick={() => setMenuOpen(false)}>Why Cedar</a>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
-            <a className="nav-cta" href="#appointment" onClick={() => setMenuOpen(false)}>Request appointment</a>
-          </div>
-          <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen ? <X /> : <Menu />}</button>
-        </nav>
-      </header>
+  <section className="quick-strip"><div className="container quick-grid"><div><span>01</span><p><strong>Find the right care</strong><small>Explore child-health services</small></p></div><div><span>02</span><p><strong>Request a visit</strong><small>Choose a convenient date</small></p></div><div><span>03</span><p><strong>Get confirmation</strong><small>The clinic team follows up</small></p></div></div></section>
 
-      <section className="hero" id="home">
-        <div className="container hero-grid">
-          <div className="hero-copy">
-            <span className="eyebrow"><span className="pulse-dot" /> Child-focused specialist care in Kaduna</span>
-            <h1>Specialist care for <em>every stage</em> of childhood.</h1>
-            <p>Compassionate, professional paediatric care designed around children and the families who care for them.</p>
-            <div className="hero-actions">
-              <a href="#appointment" className="btn primary"><CalendarDays size={19}/> Request an appointment</a>
-              <a href="#contact" className="btn secondary"><Phone size={19}/> Contact the clinic</a>
-            </div>
-            <div className="trust-row">
-              <span><Clock3 size={18}/> 24-hour care</span>
-              <span><ShieldCheck size={18}/> Child-focused</span>
-              <span><MapPin size={18}/> Kaduna</span>
-            </div>
-          </div>
-          <div className="hero-visual">
-            <div className="photo-card">
-              <div className="illustration">
-                <div className="sun"/><div className="cloud c1"/><div className="cloud c2"/>
-                <div className="doctor"><div className="head"/><div className="body"/><div className="coat"/><div className="steth"/></div>
-                <div className="child"><div className="head"/><div className="body"/></div>
-              </div>
-              <div className="floating-card"><span className="float-icon"><HeartPulse /></span><div><strong>Care that puts children first</strong><small>Warm. Professional. Family-centred.</small></div></div>
-            </div>
-          </div>
-        </div>
-      </section>
+  <section className="section about" id="about"><div className="container about-grid"><div className="about-heading"><span className="section-label">About Cedar</span><h2>Healthcare built around <span>children and families.</span></h2></div><div className="about-copy"><p>This concept presents Cedar as a welcoming specialist child-health clinic in Kaduna, with a digital experience that makes essential information and appointment enquiries easier for parents to access.</p><div className="mini-points"><span><CheckCircle2/>Parent-friendly information</span><span><CheckCircle2/>Clear appointment pathway</span><span><CheckCircle2/>Specialist-care visibility</span></div></div></div></section>
 
-      <section className="section about" id="about">
-        <div className="container split">
-          <div><span className="section-label">About Cedar</span><h2>A welcoming place for children. <span>A trusted partner for parents.</span></h2></div>
-          <div className="about-copy"><p>Cedar Paediatric Clinic is presented here as a specialist child-health clinic serving families in Kaduna. This concept demonstrates how a dedicated digital platform can make clinic information and appointment enquiries easier to access.</p><p className="demo-note">Clinic-specific wording, team profiles and service details will be confirmed with Cedar before any official launch.</p></div>
-        </div>
-      </section>
+  <section className="section services" id="services"><div className="container"><div className="section-heading"><div><span className="section-label">Our services</span><h2>Care for <span>growing children.</span></h2></div><p>Clear service information helps parents reach the right team with less uncertainty.</p></div><div className="service-grid">{services.map(({icon:Icon,title,text})=><article className="service-card" key={title}><span className="service-icon"><Icon/></span><div><h3>{title}</h3><p>{text}</p><a href="#appointment">Request consultation <ArrowRight size={16}/></a></div></article>)}</div></div></section>
 
-      <section className="section services" id="services">
-        <div className="container">
-          <div className="section-heading"><div><span className="section-label">Our services</span><h2>Care designed around <span>growing children.</span></h2></div><p>A simple, parent-friendly way to understand available care and reach the right team.</p></div>
-          <div className="service-grid">{services.map(({icon: Icon,title,text}) => <article className="service-card" key={title}><span className="service-icon"><Icon /></span><h3>{title}</h3><p>{text}</p><a href="#appointment">Request consultation <ArrowRight size={16}/></a></article>)}</div>
-        </div>
-      </section>
+  <section className="section why" id="why"><div className="container why-grid"><div className="why-photo"><img src="https://images.pexels.com/photos/8460049/pexels-photo-8460049.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Doctor caring for a young child"/><div className="availability"><Clock3/><div><strong>Care when families need it</strong><small>24-hour availability shown in public listings</small></div></div></div><div className="why-copy"><span className="section-label">Why Cedar</span><h2>A simpler healthcare journey <span>for parents.</span></h2><p>A modern clinic website can give families a reliable starting point before they arrive.</p><div className="feature-list"><div><ShieldCheck/><span><strong>Child-focused approach</strong><small>Information organised around children and families.</small></span></div><div><CalendarDays/><span><strong>Structured appointment requests</strong><small>Choose a service and preferred date online.</small></span></div><div><Users/><span><strong>Specialist visibility</strong><small>Make it easier to understand the care team and available expertise.</small></span></div></div></div></div></section>
 
-      <section className="section why" id="why">
-        <div className="container why-grid">
-          <div className="why-panel"><span className="mini-badge">For parents & families</span><div className="big-heart"><HeartPulse /></div><div className="availability"><Clock3/><div><strong>Open 24 hours</strong><small>Public listing — confirm with clinic</small></div></div></div>
-          <div className="why-copy"><span className="section-label">Why Cedar</span><h2>Making healthcare feel a little <span>easier for families.</span></h2><p>A modern clinic website can give parents a clear starting point before they arrive.</p>
-            <div className="feature-list"><div><ShieldCheck/><span><strong>Child-focused approach</strong><small>Information organised around children and families.</small></span></div><div><CalendarDays/><span><strong>Structured appointment requests</strong><small>Choose a service, date and preferred time online.</small></span></div><div><MapPin/><span><strong>Easy to find</strong><small>Clear location and contact information for Kaduna families.</small></span></div></div>
-          </div>
-        </div>
-      </section>
+  <section className="team-band"><div className="container team-inner"><div><span className="section-label light">Clinical team</span><h2>Meet the people behind the care.</h2><p>The official site can introduce Cedar's clinicians with verified qualifications, specialties and consultation information.</p></div><div className="team-placeholder"><span><Stethoscope/></span><strong>Clinician profiles</strong><small>Ready to populate with Cedar's approved team information</small></div></div></section>
 
-      <section className="section appointment" id="appointment">
-        <div className="container appointment-grid">
-          <div className="appointment-copy"><span className="section-label light">Appointment request</span><h2>Start your visit <span>before you arrive.</span></h2><p>Send a simple appointment request and the clinic team can contact you to confirm availability.</p><div className="privacy"><ShieldCheck/><span><strong>Privacy-conscious by design</strong><small>Please don't include detailed or sensitive medical records in this demo form.</small></span></div></div>
-          <div className="form-card">
-            {submitted ? <div className="success"><span><ShieldCheck size={38}/></span><h3>Request received</h3><p>This is a demonstration only. In the finished platform, Cedar's team would receive the request and contact the parent or guardian to confirm.</p><button onClick={()=>setSubmitted(false)} className="btn primary">Send another request</button></div> :
-            <form onSubmit={submitAppointment}><div className="form-title"><h3>Request an appointment</h3><p>Fields marked * are required</p></div><div className="form-grid"><label>Parent / guardian name *<input required placeholder="Your full name"/></label><label>Phone number *<input required type="tel" placeholder="e.g. 0800 000 0000"/></label><label>Email address<input type="email" placeholder="you@example.com"/></label><label>Child's age<select defaultValue=""><option value="" disabled>Select age range</option><option>0–12 months</option><option>1–5 years</option><option>6–12 years</option><option>13–17 years</option></select></label><label>Service *<select required defaultValue=""><option value="" disabled>Select a service</option>{services.map(s=><option key={s.title}>{s.title}</option>)}</select></label><label>Preferred date *<input required type="date"/></label></div><label>Brief reason for consultation<textarea rows="3" placeholder="Keep this brief — no sensitive medical records, please."/></label><button className="btn primary form-submit" type="submit">Submit appointment request <ArrowRight size={18}/></button><small className="form-disclaimer">Concept form only — no information is transmitted or stored.</small></form>}
-          </div>
-        </div>
-      </section>
+  <section className="section appointment" id="appointment"><div className="container appointment-grid"><div className="appointment-copy"><span className="section-label light">Appointment request</span><h2>Start your visit <span>before you arrive.</span></h2><p>Send a simple appointment request and the clinic team can contact you to confirm availability.</p><div className="privacy"><ShieldCheck/><span><strong>Privacy-conscious by design</strong><small>Avoid detailed or sensitive medical records in general enquiries.</small></span></div></div><div className="form-card">{submitted?<div className="success"><span><ShieldCheck size={38}/></span><h3>Request received</h3><p>In the finished platform, Cedar's team would receive this request and contact the parent or guardian to confirm.</p><button onClick={()=>setSubmitted(false)} className="btn primary">Send another request</button></div>:<form onSubmit={e=>{e.preventDefault();setSubmitted(true)}}><div className="form-title"><h3>Request an appointment</h3><p>* Required</p></div><div className="form-grid"><label>Parent / guardian name *<input required placeholder="Your full name"/></label><label>Phone number *<input required type="tel" placeholder="e.g. 0800 000 0000"/></label><label>Email address<input type="email" placeholder="you@example.com"/></label><label>Child's age<select defaultValue=""><option value="" disabled>Select age range</option><option>0–12 months</option><option>1–5 years</option><option>6–12 years</option><option>13–17 years</option></select></label><label>Service *<select required defaultValue=""><option value="" disabled>Select a service</option>{services.map(s=><option key={s.title}>{s.title}</option>)}</select></label><label>Preferred date *<input required type="date"/></label></div><label>Brief reason for consultation<textarea rows="2" placeholder="A short reason for the visit"/></label><button className="btn primary form-submit" type="submit">Submit appointment request <ArrowRight size={18}/></button><small className="form-disclaimer">Demo form — information is not transmitted or stored.</small></form>}</div></div></section>
 
-      <section className="section contact" id="contact"><div className="container"><div className="section-heading"><div><span className="section-label">Contact</span><h2>We're here when <span>families need us.</span></h2></div></div><div className="contact-grid"><div className="contact-card"><MapPin/><div><small>Visit us</small><strong>Club Road area, Kaduna</strong><span>Exact official address to be confirmed</span></div></div><div className="contact-card"><Clock3/><div><small>Opening hours</small><strong>24-hour care</strong><span>Based on public listings — confirm with clinic</span></div></div><div className="contact-card"><Mail/><div><small>Email</small><strong>cedarpaediatricclinic@gmail.com</strong><span>Publicly listed contact</span></div></div></div></div></section>
+  <section className="section faq"><div className="container faq-grid"><div><span className="section-label">For parents</span><h2>Helpful answers <span>before your visit.</span></h2></div><div className="faq-list">{faqs.map((f,i)=><button key={f[0]} className={`faq-item ${faq===i?'active':''}`} onClick={()=>setFaq(faq===i?-1:i)}><span><strong>{f[0]}</strong><ChevronDown/></span>{faq===i&&<p>{f[1]}</p>}</button>)}</div></div></section>
 
-      <footer><div className="container footer-grid"><div className="brand footer-brand"><span className="brand-mark"><Baby size={24}/></span><span><strong>Cedar</strong><small>Paediatric Clinic</small></span></div><p>This is an independent website concept prepared for Cedar Paediatric Clinic and is not yet the clinic's official website.</p><span>Concept © {new Date().getFullYear()}</span></div></footer>
-    </main>
-  );
+  <section className="section contact" id="contact"><div className="container"><div className="section-heading"><div><span className="section-label">Contact</span><h2>Here when <span>families need us.</span></h2></div></div><div className="contact-grid"><div className="contact-card"><MapPin/><div><small>Location</small><strong>Club Road area, Kaduna</strong><span>Official address to be verified before launch</span></div></div><div className="contact-card"><Clock3/><div><small>Availability</small><strong>24-hour care</strong><span>As shown in public business listings</span></div></div><div className="contact-card"><Mail/><div><small>Email</small><strong>cedarpaediatricclinic@gmail.com</strong><span>Publicly listed contact</span></div></div></div><div className="closing-cta"><div><span>Need to see a paediatric specialist?</span><h3>Request a convenient appointment.</h3></div><a className="btn cta-light" href="#appointment"><CalendarDays size={18}/>Start appointment request</a></div></div></section>
+
+  <div className="concept-note"><ShieldCheck/><p><strong>Concept website.</strong> This independent demonstration was prepared for Cedar Paediatric Clinic. Clinic information, clinician profiles and contact details will be verified before official publication.</p></div>
+  <footer><div className="container footer-grid"><div className="brand footer-brand"><span className="brand-mark"><Baby size={24}/></span><span><strong>Cedar</strong><small>Paediatric Clinic</small></span></div><p>Thoughtful digital access for children, parents and families.</p><span>Concept © {new Date().getFullYear()}</span></div></footer>
+  <a className="floating-contact" href="#contact" aria-label="Contact Cedar"><MessageCircle/></a>
+ </main>
 }
